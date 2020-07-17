@@ -1,0 +1,4 @@
+# Dotfiles
+
+- brewup
+- bundle install
