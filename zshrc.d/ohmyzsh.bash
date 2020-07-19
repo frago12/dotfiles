@@ -68,7 +68,7 @@ ZSH_THEME="avit"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(autojump docker docker-compose direnv pip npm zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(autojump docker docker-compose direnv pip npm zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
