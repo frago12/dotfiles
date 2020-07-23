@@ -15,14 +15,6 @@ brew "colordiff"
 brew "rsync"
 brew "the_silver_searcher"
 
-
-# Bash completions
-# brew "brew-cask-completion"
-# brew "django-completion"
-# brew "docker-completion"
-# brew "docker-compose-completion"
-# brew "pip-completion"
-
 # General development
 tap "universal-ctags/universal-ctags"
 brew "git"
@@ -65,6 +57,7 @@ brew "bat"
 brew "hub"
 brew "pre-commit"
 brew "direnv"
+brew "hugo"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
