@@ -1,5 +1,9 @@
 export ZSH_DISABLE_COMPFIX=true
 
+# Custom config
+setopt noincappendhistory
+setopt nosharehistory
+
 # Custom zshrc sources are stored in ~/.zshrc.d
 if [[ -d $HOME/.zshrc.d ]] ; then
   for config in "$HOME"/.zshrc.d/*.bash ; do
