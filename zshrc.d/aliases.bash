@@ -17,3 +17,5 @@ alias brewup='brew update; brew upgrade; brew cleanup; brew doctor; brew bundle'
 alias git-tree='tree = log --graph --decorate --pretty=oneline --abbrev-commit'
 
 alias fork="open -a fork"
+
+alias npm-global="npm ls -g --depth=0"
