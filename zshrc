@@ -1,5 +1,3 @@
-export ZSH_DISABLE_COMPFIX=true
-
 # Custom config
 setopt noincappendhistory
 setopt nosharehistory
