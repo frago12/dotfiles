@@ -58,6 +58,7 @@ brew "hub"
 brew "pre-commit"
 brew "direnv"
 brew "hugo"
+brew "gh"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
