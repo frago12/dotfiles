@@ -1,3 +1,4 @@
+alias node15='export PATH="/usr/local/opt/node@15/bin:$PATH"'
 alias node14='export PATH="/usr/local/opt/node@14/bin:$PATH"'
 alias node12='export PATH="/usr/local/opt/node@12/bin:$PATH"'
 # export PATH="/usr/local/opt/node@12/bin:$PATH"

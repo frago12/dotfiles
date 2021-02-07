@@ -26,6 +26,7 @@ brew "watchman"
 # Node
 brew "node@12"
 brew "node@14"
+brew "node@15"
 
 # node-canvas <https://github.com/Automattic/node-canvas>
 brew "cairo"
@@ -43,6 +44,9 @@ brew "readline"
 brew "sqlite3"
 brew "xz"
 brew "zlib"
+
+# Ruby development
+brew "ruby-install"
 
 
 # More nice-to-haves and various development libraries
