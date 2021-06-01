@@ -26,7 +26,7 @@ brew "watchman"
 # Node
 brew "node@12"
 brew "node@14"
-brew "node@15"
+brew "node@16"
 
 # node-canvas <https://github.com/Automattic/node-canvas>
 brew "cairo"
