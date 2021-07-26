@@ -69,6 +69,8 @@ brew "gh"
 brew "reattach-to-user-namespace"
 
 # Apps
+cask "openconnect-gui"
+# cask "oktadeveloper/tap/okta"
 # cask "docker"
 # cask "java8"
 # cask "react-native-debugger"
