@@ -6,6 +6,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "homebrew/cask-versions"
 tap "getsentry/tools"
+tap "helix-editor/helix"
 
 # Better versions of Mac built-ins
 brew "bash"
@@ -22,6 +23,7 @@ brew "git-lfs"
 brew "vcprompt"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "watchman"
+brew "helix"
 
 # Node
 brew "node@12"
