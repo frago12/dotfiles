@@ -5,8 +5,6 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "homebrew/cask-versions"
-tap "getsentry/tools"
-tap "helix-editor/helix"
 
 # Better versions of Mac built-ins
 brew "bash"
@@ -23,11 +21,10 @@ brew "git-lfs"
 brew "vcprompt"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "watchman"
-brew "helix"
 
 # Node
-brew "node@12"
-brew "node@14"
+# brew "node@12"
+# brew "node@14"
 brew "node@16"
 
 # node-canvas <https://github.com/Automattic/node-canvas>
@@ -37,6 +34,7 @@ brew "jpeg"
 brew "libpng"
 brew "pango"
 brew "pkg-config"
+brew "nvm"
 
 brew "pipenv"
 
@@ -74,8 +72,3 @@ brew "reattach-to-user-namespace"
 cask "openconnect-gui"
 cask "docker"
 cask "raycast"
-# cask "oktadeveloper/tap/okta"
-# cask "java8"
-# cask "react-native-debugger"
-# cask "vagrant"
-# cask "vagrant-manager"
