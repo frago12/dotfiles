@@ -21,6 +21,8 @@ brew "git-lfs"
 brew "vcprompt"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "watchman"
+brew "postgresql"
+brew "flyctl"
 
 # Node
 # brew "node@12"
