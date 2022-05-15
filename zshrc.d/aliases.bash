@@ -6,7 +6,7 @@ alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resour
 
 alias ls='ls -G'
 alias ll='ls -lad'
-alias npx='pnpx'
+# alias npx='pnpx'
 alias ta='tmux a -t'
 alias ..='cd ..'
 alias home='cd ~'
