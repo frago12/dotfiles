@@ -10,37 +10,24 @@ tap "homebrew/cask-versions"
 brew "bash"
 brew "bash-completion"
 brew "colordiff"
-# brew "gnu-sed", args: ["with-default-names"]
 brew "rsync"
 brew "the_silver_searcher"
 
 # General development
-tap "universal-ctags/universal-ctags"
 brew "git"
 brew "git-lfs"
 brew "vcprompt"
-brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
+brew "universal-ctags"
 brew "watchman"
 brew "postgresql"
-brew "flyctl"
 
 # Node
-# brew "node@12"
-# brew "node@14"
 brew "node@16"
-
-# node-canvas <https://github.com/Automattic/node-canvas>
-brew "cairo"
-brew "giflib"
-brew "jpeg"
-brew "libpng"
-brew "pango"
-brew "pkg-config"
 brew "nvm"
 
-brew "pipenv"
-
 # pyenv
+brew "pkg-config"
+brew "pipenv"
 brew "pyenv"
 brew "readline"
 brew "sqlite3"
@@ -49,7 +36,6 @@ brew "zlib"
 
 # Ruby development
 brew "ruby-install"
-
 
 # More nice-to-haves and various development libraries
 brew "autojump"
@@ -72,5 +58,3 @@ brew "reattach-to-user-namespace"
 
 # Apps
 cask "openconnect-gui"
-cask "docker"
-cask "raycast"
