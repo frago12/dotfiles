@@ -5,6 +5,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "homebrew/cask-versions"
+tap "hashicorp/tap"
 
 # Better versions of Mac built-ins
 brew "bash"
@@ -36,6 +37,9 @@ brew "zlib"
 
 # Ruby development
 brew "ruby-install"
+
+# Terraform
+brew "hashicorp/tap/terraform"
 
 # More nice-to-haves and various development libraries
 brew "autojump"
