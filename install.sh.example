@@ -9,20 +9,6 @@ olddir=/path/to/dotfile # old dotfiles backup directory
 files="zshrc zshrc.d secrets.d tmux.conf hyper.js" # list of files/folders to symlink in
 ##########
 
-# Install oh-my-zsh
-if [ -d "$ZSH" ]; then
-  echo "Oh My Zsh is already installed. Skipping.."
-else
-  e_header "Installing Oh My Zsh..."
-  curl -L http://install.ohmyz.sh | sh
-  
-  # Download zsh-syntax-highlighting
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-  # Download zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
-
 # Install Homebrew
 if test ! $(which brew); then
   e_header "Installing Homebrew"
