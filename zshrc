@@ -31,5 +31,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
+# Load direnv
+eval "$(direnv hook $SHELL)"
+
 # Load zsh-syntax-highlighting; should be last.
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
