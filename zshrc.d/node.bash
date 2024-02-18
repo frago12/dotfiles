@@ -1,4 +1,4 @@
-alias node16='export PATH="${HOMEBREW_PREFIX}/opt/node@16/bin:$PATH"'
+# alias node16='export PATH="${HOMEBREW_PREFIX}/opt/node@16/bin:$PATH"'
 # alias node14='export PATH="/usr/local/opt/node@14/bin:$PATH"'
 # alias node12='export PATH="/usr/local/opt/node@12/bin:$PATH"'
 
