@@ -26,7 +26,7 @@ brew "postgresql@14"
 brew "flyctl"
 
 # Node
-brew "node@16"
+brew "node@18"
 brew "nvm"
 
 # pyenv
@@ -61,11 +61,10 @@ brew "starship"
 brew "reattach-to-user-namespace"
 
 # React native
-# brew "cocoapods"
+brew "cocoapods"
 
 # Apps
 brew "neovim"
-cask "openconnect-gui"
 cask "1password-cli"
 
 # Fonts
