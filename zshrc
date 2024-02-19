@@ -45,6 +45,8 @@ eval "$(direnv hook $SHELL)"
 export NODE_VERSIONS="${NVM_DIR}/versions/node"
 export NODE_VERSION_PREFIX="v"
 
+export HISTCONTROL=ignoredups
+
 # Load zsh-syntax-highlighting; should be last.
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /Users/franciscogonzalez/.docker/init-zsh.sh || true # Added by Docker Desktop
