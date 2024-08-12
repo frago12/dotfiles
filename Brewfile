@@ -24,6 +24,7 @@ brew "universal-ctags"
 brew "watchman"
 brew "postgresql@14"
 brew "flyctl"
+brew "act"
 
 # Node
 brew "node@18"
@@ -66,6 +67,7 @@ brew "cocoapods"
 # Apps
 brew "neovim"
 cask "1password-cli"
+cask "warp"
 
 # Fonts
 cask "font-hack-nerd-font"
@@ -82,3 +84,4 @@ brew "b2-tools"
 
 # Forage
 brew "vips"
+brew "tfenv"
