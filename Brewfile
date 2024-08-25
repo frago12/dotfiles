@@ -63,7 +63,7 @@ brew "cloudflared"
 brew "reattach-to-user-namespace"
 
 # React native
-brew "cocoapods"
+# brew "cocoapods"
 
 # Apps
 brew "neovim"
