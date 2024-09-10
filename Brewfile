@@ -57,6 +57,7 @@ brew "pre-commit"
 brew "direnv"
 brew "gh"
 brew "starship"
+brew "cloudflared"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
