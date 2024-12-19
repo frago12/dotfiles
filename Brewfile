@@ -64,7 +64,7 @@ brew "cloudflared"
 brew "reattach-to-user-namespace"
 
 # React native
-brew "cocoapods"
+# brew "cocoapods"
 
 # Apps
 brew "neovim"
@@ -74,6 +74,9 @@ cask "warp"
 # Fonts
 cask "font-hack-nerd-font"
 cask "font-fira-code"
+
+# Railway
+brew "railway"
 
 # Dequency
 tap "bbc/audiowaveform"
