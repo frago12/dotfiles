@@ -39,3 +39,8 @@ export HISTCONTROL=ignoredups
 
 # Load zsh-syntax-highlighting; should be last.
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Added by Windsurf
+export PATH="/Users/franciscogonzalez/.codeium/windsurf/bin:$PATH"
+
+export EDITOR='code'
