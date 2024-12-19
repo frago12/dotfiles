@@ -74,6 +74,9 @@ cask "warp"
 cask "font-hack-nerd-font"
 cask "font-fira-code"
 
+# Railway
+brew "railway"
+
 # Dequency
 tap "bbc/audiowaveform"
 brew "audiowaveform"
