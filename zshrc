@@ -44,3 +44,6 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 export PATH="/Users/franciscogonzalez/.codeium/windsurf/bin:$PATH"
 
 export EDITOR='code'
+
+# Added by Windsurf
+export PATH="/Users/franciscogonzalez/.codeium/windsurf/bin:$PATH"
