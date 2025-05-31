@@ -1,9 +1,4 @@
 tap "buo/cask-upgrade"
-# tap "homebrew/bundle"
-# tap "homebrew/cask-fonts"
-# tap "homebrew/services"
-# tap "homebrew/cask-versions"
-tap "hashicorp/tap"
 tap "stripe/stripe-cli"
 
 ## Terminal experience
@@ -88,7 +83,6 @@ brew "ffmpeg"
 brew "b2-tools"
 
 # Forage
-# brew "hashicorp/tap/terraform"
 brew "vips"
 brew "tfenv"
 cask "ngrok"
