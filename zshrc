@@ -45,5 +45,15 @@ export PATH="/Users/franciscogonzalez/.codeium/windsurf/bin:$PATH"
 
 export EDITOR='code'
 
+# pnpm
+export PNPM_HOME="/Users/franciscogonzalez/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+. "$HOME/.local/bin/env"
+
 # Added by Windsurf
 export PATH="/Users/franciscogonzalez/.codeium/windsurf/bin:$PATH"
