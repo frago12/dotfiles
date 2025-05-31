@@ -1,8 +1,8 @@
 tap "buo/cask-upgrade"
-tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
-tap "homebrew/services"
-tap "homebrew/cask-versions"
+# tap "homebrew/bundle"
+# tap "homebrew/cask-fonts"
+# tap "homebrew/services"
+# tap "homebrew/cask-versions"
 tap "hashicorp/tap"
 tap "stripe/stripe-cli"
 
@@ -27,7 +27,7 @@ brew "flyctl"
 brew "act"
 
 # Node
-brew "node@18"
+brew "node@22"
 brew "nvm"
 
 # pyenv
@@ -59,6 +59,7 @@ brew "direnv"
 brew "gh"
 brew "starship"
 brew "cloudflared"
+brew "caddy"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
@@ -87,7 +88,11 @@ brew "ffmpeg"
 brew "b2-tools"
 
 # Forage
-brew "hashicorp/tap/terraform"
+# brew "hashicorp/tap/terraform"
 brew "vips"
 brew "tfenv"
 cask "ngrok"
+brew "gnupg"
+brew "pinentry-mac"
+brew "uv"
+brew "mise"
