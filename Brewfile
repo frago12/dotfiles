@@ -55,6 +55,7 @@ brew "gh"
 brew "starship"
 brew "cloudflared"
 brew "caddy"
+brew "glow"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
