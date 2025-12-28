@@ -53,7 +53,4 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-. "$HOME/.local/bin/env"
-
-# Added by Windsurf
-export PATH="/Users/franciscogonzalez/.codeium/windsurf/bin:$PATH"
+# . "$HOME/.local/bin/env"
