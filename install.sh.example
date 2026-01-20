@@ -5,7 +5,7 @@
 
 ########## Variables
 dir=/path/to/dotfile # dotfiles directory
-olddir=/path/to/dotfile # old dotfiles backup directory
+olddir=/path/to/dotfile_old # old dotfiles backup directory
 files="zshrc zshrc.d secrets.d tmux.conf tmux hyper.js" # list of files/folders to symlink in
 ##########
 
