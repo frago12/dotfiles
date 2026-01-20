@@ -1,5 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "ENABLE_TOOL_SEARCH": "auto:5"
+  },
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -115,7 +118,7 @@
       "mcp__notion__notion-update-page",
       "mcp__probe__extract_code",
       "mcp__probe__query_code",
-      "mcp__probe__search_code",
+      "mcp__probe__search_code"
     ]
   },
   "hooks": {
