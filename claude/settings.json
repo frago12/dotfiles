@@ -142,12 +142,10 @@
     "Notion@claude-plugins-official": true,
     "linear@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
-    "database-design@claude-code-workflows": false,
-    "document-skills@anthropic-agent-skills": false,
-    "frontend-mobile-development@claude-code-workflows": true,
-    "frontend-mobile-security@claude-code-workflows": true,
-    "javascript-typescript@claude-code-workflows": false,
+    "sentry@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true
+    "code-simplifier@claude-plugins-official": true,
+    "compound-engineering@every-marketplace": true,
+    "pyright-lsp@claude-plugins-official": true
   }
 }

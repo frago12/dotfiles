@@ -1,26 +1,56 @@
-# PR Review
+# Core Principles
 
-Perform a comprehensive code review for PR #$ARGUMENTS
+## Command Usage
 
-## Review Process
+- Use `rm -f` (not `rm`) to avoid prompts
 
-1. **Analyze Changes**: Examine all modified files and understand the scope of changes
-2. **Code Quality**: Check for adherence to project conventions, best practices, and style guidelines
-3. **Security**: Review for potential security vulnerabilities or data exposure
-4. **Performance**: Identify potential performance issues or improvements
-5. **Documentation**: Ensure code is self-documenting and complex logic is explained
+## Communication
 
-## Output Format
+- Challenge assumptions, suggest alternatives
+- Keep explanations concise, no flattery
 
-Provide a structured review with:
+## Package Management
 
-- **Approval Status**: Ready to merge, needs changes, or needs discussion
-- **Summary**: Brief overview of the changes
-- **Strengths**: What's well done
-- **Issues**: Critical problems that must be addressed
-- **Suggestions**: Non-blocking improvements
-- **Testing**: Assessment of test coverage and quality
+- Use `pnpm` over `npm` for Node.js
 
-Focus on user-facing behavior, maintainability, and adherence to the project's testing philosophy of minimizing mocks and testing real implementations.
+## Code Organization
 
-Ultrathink and create a structured markdown file with the assessment in the ai-swap/ directory.
+- Public methods top, implementation details bottom
+
+## Tools
+
+- When I ask you to do a code review of a GitHub’s PR, always use GitHub’s CLI
+
+## Testing
+
+- Test behavior; mock minimally (external services, network, slow ops) at boundaries
+- Do not write snapshot tests
+- Only write tests that make sense and that are actually testing the code
+
+## Version Control
+
+- Use conventional commits: feat:, fix:, docs:, refactor:, test:, chore:
+
+## Subagents
+
+- **STRONGLY PREFER subagents** - use for speed and efficiency
+- Parallelize whenever possible
+- **CRITICAL**: Check .claude/CLAUDE.md for MANDATORY subagent usage
+
+## Plans
+
+- All docs I ask you to create should be Markdown (unless I say otherwise) and created inside the aidocs/ folder (if exists) at the root of the git repository
+
+## Frontend development
+
+When creating components in the Frontend, always follow the following rules:
+- Proper encapsulation
+- Clear communication between components
+- Reusability
+- Maintainability
+- Check if the new changes led to unused props, remove them
+
+### Typescript
+
+- Is never preferred to use type `any`
+- Type only the necessary things. Types inference is preferable
