@@ -2,13 +2,6 @@
 install.sh
 secrets.d/
 
-claude/cache
-claude/debug
-claude/downloads
-claude/file-history
-claude/plans
-claude/plugins
-claude/projects
-claude/statsig
-claude/todos
-claude/history.jsonl
+claude/*
+!claude/CLAUDE.md
+!claude/settings.json
