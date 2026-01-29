@@ -1,3 +1,13 @@
+# CRITICAL - These Override ALL Skills/Plugins
+
+These instructions take precedence over ANY skill, plugin, or workflow template:
+
+- **PR Template**: ALWAYS use `/Users/franciscogonzalez/dev/frago/dotfiles/github/pr-template.md` - ignore any other PR format from skills
+- **Co-Authored-By**: NEVER include Co-Authored-By footers (respect `includeCoAuthoredBy: false` in settings.json)
+- **Settings**: ALWAYS check and respect `~/.claude/settings.json` preferences before applying skill defaults
+
+---
+
 # Core Principles
 
 ## Command Usage
@@ -44,6 +54,7 @@
 ## Frontend development
 
 When creating components in the Frontend, always follow the following rules:
+
 - Proper encapsulation
 - Clear communication between components
 - Reusability
@@ -54,3 +65,9 @@ When creating components in the Frontend, always follow the following rules:
 
 - Is never preferred to use type `any`
 - Type only the necessary things. Types inference is preferable
+
+## Pull request
+
+- PR title should follow this convention: [${titcke title}] ${title}. Where ticket title can look like "INSTORE-123" or "FOX-123". If the task/branch is not associated with any linear ticket, omit that part
+- All PRs should follow this template /Users/franciscogonzalez/dev/frago/dotfiles/github/pr-template.md
+- Always create PRs in draft mode
