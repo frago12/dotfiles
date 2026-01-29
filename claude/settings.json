@@ -128,7 +128,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "file=$(jq -r '.tool_input.file_path' /dev/stdin); prettier --write --ignore-unknown \"$(realpath \"$file\")\""
+            "command": "file=$(jq -r '.tool_input.file_path' /dev/stdin); pnpm exec prettier --write --ignore-unknown \"$(realpath \"$file\")\""
           }
         ]
       }
