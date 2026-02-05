@@ -6,6 +6,9 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
+      "Read(~/dev/worktrees/**)",
+      "Read(~/dev/frago/dotfiles/github/pr-template.md)",
+      "Bash(tmux:*)",
       "Bash(/bin/ls:*)",
       "Bash(ast-grep:*)",
       "Bash(awk:*)",
@@ -43,7 +46,6 @@
       "Bash(wget:*)",
       "Bash(zizmor:*)",
       "Skill(date-calculator)",
-      "SlashCommand(/review:*)",
       "WebFetch(domain:anthropic.com)",
       "WebFetch(domain:zizmor.sh)",
       "WebFetch(domain:github.com)",
