@@ -20,9 +20,10 @@ brew "watchman"
 brew "postgresql@14"
 brew "flyctl"
 brew "act"
+brew "docker"
 
 # Node
-brew "node@22"
+# brew "node@22"
 brew "nvm"
 
 # pyenv
@@ -56,6 +57,8 @@ brew "starship"
 brew "cloudflared"
 brew "caddy"
 brew "glow"
+brew "lazygit"
+brew "yazi"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
@@ -66,7 +69,7 @@ brew "reattach-to-user-namespace"
 # Apps
 brew "neovim"
 cask "1password-cli"
-cask "warp"
+cask "typora"
 
 # Fonts
 cask "font-hack-nerd-font"
