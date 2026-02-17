@@ -62,6 +62,7 @@ brew "yazi"
 brew "neovim"
 brew "fd"
 brew "fzf"
+brew "ripgrep"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
