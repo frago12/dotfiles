@@ -61,6 +61,7 @@ brew "lazygit"
 brew "yazi"
 brew "neovim"
 brew "fd"
+brew "fzf"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
