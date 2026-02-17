@@ -19,9 +19,24 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Setup lazy.nvim
+-- Setup lazy.nvim with LazyVim
 require("lazy").setup({
   spec = {
-    -- add plugins here
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- add your plugins here
+  },
+  defaults = { lazy = false, version = false },
+  rocks = { enabled = false },
+  checker = { enabled = true },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
   },
 })

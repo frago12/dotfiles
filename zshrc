@@ -40,10 +40,7 @@ export HISTCONTROL=ignoredups
 # Load zsh-syntax-highlighting; should be last.
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Added by Windsurf
-export PATH="/Users/franciscogonzalez/.codeium/windsurf/bin:$PATH"
-
-export EDITOR='code'
+export EDITOR='nvim'
 
 # pnpm
 export PNPM_HOME="/Users/franciscogonzalez/Library/pnpm"
@@ -51,6 +48,10 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
-# . "$HOME/.local/bin/env"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Cargo
+export PATH="$HOME/.cargo/bin:$PATH"
