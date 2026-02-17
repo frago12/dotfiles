@@ -20,17 +20,20 @@ This skill automates the complete setup of an isolated development environment f
 ## Optional Linear Ticket Argument
 
 If a Linear ticket URL is provided as an argument, the skill will automatically derive:
+
 - **Worktree name**: Lowercase issue ID (e.g., `fox-124`)
 - **Branch name**: `francisco/{issue-id}-{title-slug}` (e.g., `francisco/fox-124-fe-update-copy-to-reflect-support-for-non-ebt-refunds`)
 
 **URL Format:** `https://linear.app/{workspace}/issue/{ISSUE-ID}/{title-slug}`
 
 **Example:**
+
 ```
 /forage:working-session https://linear.app/joinforage/issue/FOX-124/fe-update-copy-to-reflect-support-for-non-ebt-refunds
 ```
 
 Generates:
+
 - Worktree name: `fox-124`
 - Branch name: `francisco/fox-124-fe-update-copy-to-reflect-support-for-non-ebt-refunds`
 
@@ -38,12 +41,12 @@ If no ticket URL is provided, the skill will prompt for worktree name and branch
 
 ## Constants
 
-| Constant | Value |
-|----------|-------|
-| Main repo | `/Users/franciscogonzalez/dev/fe-monorepo` |
-| Worktrees directory | `~/dev/worktrees/` |
-| Apps directory | `apps/` |
-| Default base branch | `staging` |
+| Constant            | Value                                      |
+| ------------------- | ------------------------------------------ |
+| Main repo           | `/Users/franciscogonzalez/dev/fe-monorepo` |
+| Worktrees directory | `~/dev/worktrees/`                         |
+| Apps directory      | `apps/`                                    |
+| Default base branch | `staging`                                  |
 
 ## Available Apps
 
@@ -86,11 +89,13 @@ If a Linear ticket URL was provided as an argument, parse it to extract the work
 **URL Pattern:** `https://linear.app/{workspace}/issue/{ISSUE-ID}/{title-slug}`
 
 **Parsing:**
+
 1. Extract `{ISSUE-ID}` (e.g., `FOX-124`) → convert to lowercase for worktree name (e.g., `fox-124`)
 2. Extract `{title-slug}` (e.g., `fe-update-copy-to-reflect-support-for-non-ebt-refunds`)
 3. Generate branch name: `francisco/{lowercase-issue-id}-{title-slug}`
 
 **Example:**
+
 - URL: `https://linear.app/joinforage/issue/FOX-124/fe-update-copy-to-reflect-support-for-non-ebt-refunds`
 - Worktree name: `fox-124`
 - Branch name: `francisco/fox-124-fe-update-copy-to-reflect-support-for-non-ebt-refunds`
@@ -116,6 +121,7 @@ Wait for text input. This will be the name of the new branch created in the work
 #### Question: Base branch (Always Ask)
 
 Use `AskUserQuestion` with these options:
+
 - Question: "Which base branch should the worktree be created from?"
 - Options:
   1. `staging` (Recommended) - Use the staging branch
@@ -132,6 +138,7 @@ git worktree add ~/dev/worktrees/{name} -b {branch-name} origin/{base-branch}
 ```
 
 Where:
+
 - `{name}` = session name (worktree directory and tmux session)
 - `{branch-name}` = new git branch name
 - `{base-branch}` = base branch to create from (e.g., staging)
@@ -187,11 +194,13 @@ Available apps: checkout, custom-checkout, merchant-dashboard, sdk, refunds, sho
 **Validation:** After receiving input, validate that ALL entered apps are in the available list.
 
 - If ANY app is invalid, show an error and ask again:
+
   ```
   Invalid app(s): {invalid-apps}
 
   Please enter only valid apps from: checkout, custom-checkout, merchant-dashboard, sdk, refunds, shop-gateway, shop-addon
   ```
+
 - Keep asking until all entered apps are valid
 - Only proceed to Step 8 once validation passes
 
