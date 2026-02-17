@@ -59,6 +59,8 @@ brew "caddy"
 brew "glow"
 brew "lazygit"
 brew "yazi"
+brew "neovim"
+brew "fd"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
@@ -67,7 +69,6 @@ brew "reattach-to-user-namespace"
 # brew "cocoapods"
 
 # Apps
-brew "neovim"
 cask "1password-cli"
 cask "typora"
 
