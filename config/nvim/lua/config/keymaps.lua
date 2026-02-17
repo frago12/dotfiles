@@ -4,5 +4,12 @@
 
 local map = vim.keymap.set
 
--- NeoTree: focus the explorer window (opens it if closed)
-map("n", "<leader>o", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
+-- Focus the Snacks explorer window (opens it if closed)
+map("n", "<leader>o", function()
+  local pickers = Snacks.picker.get({ source = "explorer" })
+  if #pickers > 0 then
+    pickers[1]:focus("list")
+  else
+    Snacks.explorer.open()
+  end
+end, { desc = "Explorer focus" })
