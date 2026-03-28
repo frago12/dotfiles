@@ -1,0 +1,2 @@
+--glob=!node_modules/
+--glob=!pnpm-lock.yaml
