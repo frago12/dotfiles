@@ -73,6 +73,7 @@ brew "reattach-to-user-namespace"
 # Apps
 cask "1password-cli"
 cask "typora"
+cask "codex"
 
 # Fonts
 cask "font-hack-nerd-font"

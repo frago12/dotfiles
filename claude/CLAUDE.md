@@ -10,6 +10,8 @@ These instructions take precedence over ANY skill, plugin, or workflow template:
 
 # Core Principles
 
+- You don't always have to follow existing rules, always challenge the status quo if you think there's a better solution
+
 ## Command Usage
 
 - Use `rm -f` (not `rm`) to avoid prompts
@@ -50,6 +52,10 @@ These instructions take precedence over ANY skill, plugin, or workflow template:
 ## Plans
 
 - All docs I ask you to create should be Markdown (unless I say otherwise) and created inside the aidocs/ folder (if exists) at the root of the git repository
+
+## Coding
+
+- Never re-export an import, always import directly from the source
 
 ## Frontend development
 

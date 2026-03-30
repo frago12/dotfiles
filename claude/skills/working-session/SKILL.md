@@ -46,7 +46,7 @@ If no ticket URL is provided, the skill will prompt for worktree name and branch
 | Main repo           | `/Users/franciscogonzalez/dev/fe-monorepo` |
 | Worktrees directory | `~/dev/worktrees/`                         |
 | Apps directory      | `apps/`                                    |
-| Default base branch | `staging`                                  |
+| Default base branch | `main`                                     |
 
 ## Available Apps
 
@@ -124,7 +124,7 @@ Use `AskUserQuestion` with these options:
 
 - Question: "Which base branch should the worktree be created from?"
 - Options:
-  1. `staging` (Recommended) - Use the staging branch
+  1. `main` (Recommended) - Use the main branch
   2. Custom - User provides a different branch name via "Other" input
 
 ### Step 3: Create Worktree
@@ -133,15 +133,22 @@ Create the worktree from the specified base branch:
 
 ```bash
 cd /Users/franciscogonzalez/dev/fe-monorepo
-git fetch origin {base-branch}
-git worktree add ~/dev/worktrees/{name} -b {branch-name} origin/{base-branch}
+git fetch origin {base-branch}:{base-branch}
+git worktree add ~/dev/worktrees/{name} -b {branch-name} {base-branch}
+cd ~/dev/worktrees/{name} && git branch --unset-upstream
 ```
 
 Where:
 
 - `{name}` = session name (worktree directory and tmux session)
 - `{branch-name}` = new git branch name
-- `{base-branch}` = base branch to create from (e.g., staging)
+- `{base-branch}` = base branch to start from (e.g., `main`). This is only the **starting point** — it does NOT affect where your changes are pushed.
+
+**IMPORTANT:**
+
+- We use the **local** `{base-branch}` (not `origin/{base-branch}`) as the starting point. Using `origin/{base-branch}` would automatically set it as the upstream of the new branch, which is wrong.
+- `git branch --unset-upstream` ensures the new branch has **no upstream** until the first explicit push.
+- First push must always be: `git push -u origin {branch-name}` — this sets `origin/{branch-name}` as the upstream, never `origin/main` or `origin/{base-branch}`.
 
 ### Step 4: Create Tmux Session
 
@@ -263,13 +270,14 @@ For `/forage:working-session https://linear.app/joinforage/issue/FOX-124/fe-upda
 - Parsed worktree name: `fox-124`
 - Parsed branch name: `francisco/fox-124-fe-update-copy-to-reflect-support-for-non-ebt-refunds`
 - Apps: `checkout` and `merchant-dashboard`
-- Base branch: `staging`
+- Base branch: `main`
 
 ```bash
-# Create worktree (using staging as base branch)
+# Create worktree (using local main as starting point — upstream will NOT be set to main)
 cd /Users/franciscogonzalez/dev/fe-monorepo
-git fetch origin staging
-git worktree add ~/dev/worktrees/fox-124 -b francisco/fox-124-fe-update-copy-to-reflect-support-for-non-ebt-refunds origin/staging
+git fetch origin main:main
+git worktree add ~/dev/worktrees/fox-124 -b francisco/fox-124-fe-update-copy-to-reflect-support-for-non-ebt-refunds main
+cd ~/dev/worktrees/fox-124 && git branch --unset-upstream
 
 # Create tmux session
 tmux new-session -d -s fox-124 -c ~/dev/worktrees/fox-124
@@ -304,13 +312,14 @@ tmux attach -t fox-124
 
 ### Example without Linear Ticket URL (Manual Input)
 
-For a session named `feature-payments`, branch `instore-1234-payment-flow`, apps `checkout` and `merchant-dashboard`, using `staging` as base branch:
+For a session named `feature-payments`, branch `instore-1234-payment-flow`, apps `checkout` and `merchant-dashboard`, using `main` as base branch:
 
 ```bash
-# Create worktree (using staging as base branch)
+# Create worktree (using local main as starting point — upstream will NOT be set to main)
 cd /Users/franciscogonzalez/dev/fe-monorepo
-git fetch origin staging
-git worktree add ~/dev/worktrees/feature-payments -b instore-1234-payment-flow origin/staging
+git fetch origin main:main
+git worktree add ~/dev/worktrees/feature-payments -b instore-1234-payment-flow main
+cd ~/dev/worktrees/feature-payments && git branch --unset-upstream
 
 # Create tmux session
 tmux new-session -d -s feature-payments -c ~/dev/worktrees/feature-payments
