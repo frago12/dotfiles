@@ -25,8 +25,11 @@ These instructions take precedence over ANY skill, plugin, or workflow template:
 
 - Use `pnpm` over `npm` for Node.js
 
-## Code Organization
+## Coding
 
+- **Always** prioritize readability and separation of concerns when writing code
+- **Never** re-export an import, always import directly from the source
+- Always add descriptive variable names
 - Public methods top, implementation details bottom
 
 ## Tools
@@ -52,10 +55,6 @@ These instructions take precedence over ANY skill, plugin, or workflow template:
 ## Plans
 
 - All docs I ask you to create should be Markdown (unless I say otherwise) and created inside the aidocs/ folder (if exists) at the root of the git repository
-
-## Coding
-
-- Never re-export an import, always import directly from the source
 
 ## Frontend development
 
