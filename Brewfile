@@ -23,7 +23,7 @@ brew "act"
 brew "docker"
 
 # Node
-# brew "node@22"
+brew "node@24"
 brew "nvm"
 
 # pyenv
@@ -63,6 +63,7 @@ brew "neovim"
 brew "fd"
 brew "fzf"
 brew "ripgrep"
+brew "agent-browser"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
