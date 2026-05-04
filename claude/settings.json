@@ -121,7 +121,8 @@
       "mcp__probe__extract_code",
       "mcp__probe__query_code",
       "mcp__probe__search_code"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "hooks": {
     "PostToolUse": [
@@ -163,5 +164,6 @@
       }
     }
   },
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "skipAutoPermissionPrompt": true
 }
