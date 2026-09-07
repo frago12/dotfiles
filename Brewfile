@@ -75,7 +75,6 @@ brew "reattach-to-user-namespace"
 # Apps
 cask "1password-cli"
 cask "typora"
-cask "codex"
 
 # Fonts
 cask "font-hack-nerd-font"
@@ -88,7 +87,7 @@ brew "railway"
 tap "bbc/audiowaveform"
 brew "audiowaveform"
 brew "awscli"
-brew "stripe/stripe-cli/stripe"
+# brew "stripe/stripe-cli/stripe"
 brew "ffmpeg"
 brew "b2-tools"
 
@@ -100,3 +99,6 @@ brew "gnupg"
 brew "pinentry-mac"
 brew "uv"
 brew "mise"
+
+tap "vtex"
+brew "vtex"

@@ -27,7 +27,7 @@ echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
+# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
     # echo "Moving any existing dotfiles from ~ to $olddir"
     mv ~/.$file $olddir
@@ -42,3 +42,9 @@ ln -sf $dir/config/nvim ~/.config/nvim
 # Install Claude marketplaces
 claude  plugin marketplace add https://github.com/anthropics/claude-plugins-official
 claude  plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
+
+# Install agent skills (https://www.npmjs.com/package/skills)
+npm install -g skills
+skills add vercel-labs/skills --skill find-skills --global --agent claude-code cursor grok --yes
+skills add dmmulroy/anti-slop --skill install-anti-slop --global --agent claude-code cursor grok --yes
+skills add wshobson/agents --skill mobile-ios-design --global --agent claude-code cursor grok --yes

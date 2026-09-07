@@ -124,6 +124,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "fable[1m]",
   "hooks": {
     "PostToolUse": [
       {
@@ -154,7 +155,8 @@
     "superpowers@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "notion@claude-plugins-official": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "swift-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
@@ -162,8 +164,22 @@
         "source": "github",
         "repo": "openai/codex-plugin-cc"
       }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/anthropics/claude-plugins-official.git"
+      }
+    },
+    "compound-engineering-plugin": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/EveryInc/compound-engineering-plugin.git"
+      }
     }
   },
-  "voiceEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "tui": "fullscreen",
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }

@@ -15,7 +15,7 @@ if command -v pyenv 1>/dev/null 2>&1; then  eval "$(pyenv init -)";fi;
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-export LDFLAGS= 
+export LDFLAGS=
 eval "$(rbenv init - $SHELL)"
 
 # Autojump
@@ -55,5 +55,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Cargo
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Go
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 # if [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then...fi

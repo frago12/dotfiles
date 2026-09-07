@@ -5,12 +5,14 @@ These instructions take precedence over ANY skill, plugin, or workflow template:
 - **PR Template**: ALWAYS use `/Users/franciscogonzalez/dev/frago/dotfiles/github/pr-template.md` - ignore any other PR format from skills
 - **Co-Authored-By**: NEVER include Co-Authored-By footers (respect `includeCoAuthoredBy: false` in settings.json)
 - **Settings**: ALWAYS check and respect `~/.claude/settings.json` preferences before applying skill defaults
+- Do not overengineer the solutions, always implement the simplest solution. Only make necessary changes.
 
 ---
 
 # Core Principles
 
 - You don't always have to follow existing rules, always challenge the status quo if you think there's a better solution
+- **Be concise**
 
 ## Command Usage
 
@@ -27,6 +29,7 @@ These instructions take precedence over ANY skill, plugin, or workflow template:
 
 ## Coding
 
+- do not add comments unless is necessary
 - **Always** prioritize readability and separation of concerns when writing code
 - **Never** re-export an import, always import directly from the source
 - Always add descriptive variable names
@@ -35,16 +38,13 @@ These instructions take precedence over ANY skill, plugin, or workflow template:
 ## Tools
 
 - When I ask you to do a code review of a GitHub’s PR, always use GitHub’s CLI
+- For browser automation, ALWAYS use the `agent-browser` CLI (`/opt/homebrew/bin/agent-browser`) for opening URLs, clicking elements, evaluating JS in the page, taking snapshots, etc. Do NOT use the `claude-in-chrome` or `chrome-devtools` MCP tools — `agent-browser` is the preferred and more reliable option. Run `agent-browser --help` if you need a refresher on the subcommands.
 
 ## Testing
 
 - Test behavior; mock minimally (external services, network, slow ops) at boundaries
 - Do not write snapshot tests
 - Only write tests that make sense and that are actually testing the code
-
-## Version Control
-
-- Use conventional commits: feat:, fix:, docs:, refactor:, test:, chore:
 
 ## Subagents
 
