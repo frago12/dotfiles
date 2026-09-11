@@ -44,7 +44,7 @@ claude  plugin marketplace add https://github.com/anthropics/claude-plugins-offi
 claude  plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
 
 # Install agent skills (https://www.npmjs.com/package/skills)
-npm install -g skills
+npm install -g skills@latest
 skills add vercel-labs/skills --skill find-skills --global --agent claude-code cursor grok --yes
 skills add dmmulroy/anti-slop --skill install-anti-slop --global --agent claude-code cursor grok --yes
 skills add wshobson/agents --skill mobile-ios-design --global --agent claude-code cursor grok --yes
