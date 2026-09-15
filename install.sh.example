@@ -27,17 +27,36 @@ echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
+# Replace existing homedir files with symlinks, backing up real files.
+# Skip dest if it's already the right symlink so a re-run doesn't ln into the
+# linked directory (which creates repo/dir/dir loops).
 for file in $files; do
-    # echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file $olddir
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+  target="$dir/$file"
+  dest="$HOME/.$file"
+
+  if [[ -L "$dest" && "$(readlink "$dest")" == "$target" ]]; then
+    echo "Already linked $dest"
+    continue
+  fi
+
+  if [[ -L "$dest" ]]; then
+    rm -f "$dest"
+  elif [[ -e "$dest" ]]; then
+    backup="$olddir/.$file"
+    if [[ -e "$backup" || -L "$backup" ]]; then
+      mv "$backup" "$olddir/.$file.$(date +%Y%m%d%H%M%S)"
+    fi
+    echo "Backing up $dest to $olddir"
+    mv "$dest" "$olddir/"
+  fi
+
+  echo "Creating symlink to $file in home directory."
+  ln -sfn "$target" "$dest"
 done
 
 # Symlink ~/.config apps (nvim, etc.)
 mkdir -p ~/.config
-ln -sf $dir/config/nvim ~/.config/nvim
+ln -sfn "$dir/config/nvim" ~/.config/nvim
 
 # Install Claude marketplaces
 claude  plugin marketplace add https://github.com/anthropics/claude-plugins-official
