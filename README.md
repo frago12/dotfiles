@@ -6,4 +6,5 @@
 - update $dir and $olddir variables
 - `./install.sh`
 - `brewup`
+- `dotup`
 - `bundle install`

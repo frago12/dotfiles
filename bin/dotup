@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+step() {
+  printf '\n==> %s\n' "$1"
+}
+
+dotfiles_root() {
+  local source="${BASH_SOURCE[0]}"
+  while [[ -L "$source" ]]; do
+    local dir
+    dir="$(cd -P "$(dirname "$source")" && pwd)"
+    source="$(readlink "$source")"
+    [[ "$source" != /* ]] && source="$dir/$source"
+  done
+  cd -P "$(dirname "$source")/.." && pwd
+}
+
+load_nvm() {
+  export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+  local nvm_sh=""
+  if command -v brew >/dev/null 2>&1; then
+    nvm_sh="$(brew --prefix nvm 2>/dev/null)/nvm.sh"
+  fi
+  if [[ ! -s "$nvm_sh" ]]; then
+    nvm_sh="$NVM_DIR/nvm.sh"
+  fi
+  # shellcheck disable=SC1090
+  . "$nvm_sh"
+}
+
+DOTFILES="$(dotfiles_root)"
+
+step "Homebrew"
+brew update
+brew upgrade
+brew cleanup
+brew doctor || true
+if [[ -f "$DOTFILES/Brewfile" ]]; then
+  brew bundle --file="$DOTFILES/Brewfile"
+fi
+if brew commands --quiet 2>/dev/null | grep -qx cu; then
+  brew cu --all --yes --no-brew-update || true
+fi
+
+step "Node LTS (nvm)"
+load_nvm
+from="$(nvm version)"
+if [[ "$from" != "N/A" && "$from" != "system" ]]; then
+  nvm install --lts --latest-npm --reinstall-packages-from="$from"
+else
+  nvm install --lts --latest-npm
+fi
+nvm alias default 'lts/*'
+nvm use default
+npm update -g
+
+if command -v rustup >/dev/null 2>&1; then
+  step "Rust"
+  rustup update
+fi
+
+if command -v grok >/dev/null 2>&1; then
+  step "Grok"
+  grok update
+fi
+
+if [[ -f "$DOTFILES/Gemfile" ]] && command -v bundle >/dev/null 2>&1; then
+  step "Ruby gems"
+  (cd "$DOTFILES" && bundle install)
+fi
+
+step "Done"
+echo "node $(node -v) (nvm default: $(nvm alias default))"
+command -v rustc >/dev/null 2>&1 && echo "rustc $(rustc --version)"
+command -v grok >/dev/null 2>&1 && echo "grok $(grok --version 2>/dev/null | head -n 1)"

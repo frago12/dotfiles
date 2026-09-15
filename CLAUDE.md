@@ -24,6 +24,9 @@ cp install.sh.example install.sh
 # Install/update all Homebrew packages
 brewup
 
+# Update brew, Node LTS (nvm), rust, grok, and gems
+dotup
+
 # Install Ruby gems
 bundle install
 
@@ -53,7 +56,7 @@ The `zshrc` file sources all `.bash` files from `zshrc.d/` directory, providing 
 
 ### Environment Management
 - **Python**: pyenv for version management
-- **Node.js**: nvm with Node 22 as default
+- **Node.js**: nvm with the current Node LTS as default
 - **Ruby**: rbenv for version management
 - **Terminal**: Starship prompt with custom configuration
 
