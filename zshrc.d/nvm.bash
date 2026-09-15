@@ -1,28 +1,67 @@
-# Load nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
-[ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+export NODE_VERSIONS="${NVM_DIR}/versions/node"
+export NODE_VERSION_PREFIX="v"
 
-# .nvmrc
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
+# Put the default Node on PATH without sourcing nvm.sh
+_nvm_default_bin() {
+  emulate -L zsh
+  setopt noglob
+  local alias_dir="$NVM_DIR/alias" target n=0
+  [[ -r "$alias_dir/default" ]] || return 1
+  target=$(<"$alias_dir/default")
+  target=${target//$'\n'/}
+  while [[ -r "$alias_dir/$target" && n -lt 8 ]]; do
+    target=$(<"$alias_dir/$target")
+    target=${target//$'\n'/}
+    (( n++ ))
+  done
+  local bin="$NVM_DIR/versions/node/$target/bin"
+  [[ -d "$bin" ]] || return 1
+  print -r -- "$bin"
+}
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+_nvm_bin="$(_nvm_default_bin)"
+if [[ -n "$_nvm_bin" ]]; then
+  export PATH="$_nvm_bin:$PATH"
+fi
+unset -f _nvm_default_bin
+unset -v _nvm_bin
 
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
+_nvm_load() {
+  unset -f nvm _nvm_load
+  [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" --no-use
+  local nvm_completion="${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm"
+  [[ -s "$nvm_completion" ]] && . "$nvm_completion"
+}
+
+nvm() {
+  _nvm_load
+  nvm "$@"
+}
+
+_nvm_find_nvmrc() {
+  local dir="$PWD"
+  while true; do
+    if [[ -f "$dir/.nvmrc" ]]; then
+      print -r -- "$dir/.nvmrc"
+      return 0
     fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
+    [[ "$dir" == "/" ]] && return 1
+    dir="${dir:h}"
+  done
+}
+
+_nvm_using_nvmrc=0
+load-nvmrc() {
+  if _nvm_find_nvmrc >/dev/null; then
+    nvm use --silent
+    _nvm_using_nvmrc=1
+  elif (( _nvm_using_nvmrc )); then
+    nvm use default --silent
+    _nvm_using_nvmrc=0
   fi
 }
+
+autoload -U add-zsh-hook
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
-
