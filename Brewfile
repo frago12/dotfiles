@@ -65,6 +65,7 @@ brew "fzf"
 brew "ripgrep"
 brew "agent-browser"
 brew "zizmor"
+brew "ffmpeg"
 
 # tmux copy and paste
 brew "reattach-to-user-namespace"
