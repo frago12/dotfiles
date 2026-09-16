@@ -76,10 +76,12 @@ brew "reattach-to-user-namespace"
 # Apps
 cask "1password-cli"
 cask "typora"
+cask "ghostty"
 
 # Fonts
 cask "font-hack-nerd-font"
 cask "font-fira-code"
+cask "font-jetbrains-mono-nerd-font"
 
 # Railway
 brew "railway"
@@ -100,6 +102,3 @@ brew "gnupg"
 brew "pinentry-mac"
 brew "uv"
 brew "mise"
-
-tap "vtex"
-brew "vtex"
