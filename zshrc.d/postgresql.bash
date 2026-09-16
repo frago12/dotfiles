@@ -1,1 +1,1 @@
-export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+export PATH="${HOMEBREW_PREFIX}/opt/postgresql@18/bin:$PATH"

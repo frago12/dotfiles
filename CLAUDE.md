@@ -21,14 +21,8 @@ cp install.sh.example install.sh
 # Edit install.sh to set correct paths
 ./install.sh
 
-# Install/update all Homebrew packages
-brewup
-
-# Update brew, Node LTS (nvm), rust, grok, and gems
+# Update brew (incl. leftover cleanup), Node LTS, rust, grok, and gems
 dotup
-
-# Install Ruby gems
-bundle install
 
 # Reload shell configuration
 reload

@@ -1,5 +1,5 @@
-tap "buo/cask-upgrade"
-tap "stripe/stripe-cli"
+tap "buo/cask-upgrade", trusted: true
+tap "stripe/stripe-cli", trusted: true
 
 ## Terminal experience
 brew "zsh-syntax-highlighting"
@@ -17,7 +17,7 @@ brew "git-lfs"
 brew "vcprompt"
 brew "universal-ctags"
 brew "watchman"
-brew "postgresql@14"
+brew "postgresql@18"
 brew "flyctl"
 brew "act"
 brew "docker"
@@ -44,7 +44,6 @@ brew "rbenv"
 brew "autojump"
 brew "httpie"
 brew "openssl"
-brew "tmate"
 brew "tmux"
 brew "tmuxinator"
 brew "trash"
@@ -87,11 +86,10 @@ cask "font-jetbrains-mono-nerd-font"
 brew "railway"
 
 # Dequency
-tap "bbc/audiowaveform"
+tap "bbc/audiowaveform", trusted: true
 brew "audiowaveform"
 brew "awscli"
-# brew "stripe/stripe-cli/stripe"
-brew "ffmpeg"
+brew "stripe/stripe-cli/stripe"
 brew "b2-tools"
 
 # Forage

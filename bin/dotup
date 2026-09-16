@@ -16,6 +16,15 @@ dotfiles_root() {
   cd -P "$(dirname "$source")/.." && pwd
 }
 
+# nvm.sh is not nounset-safe (`nvm version` reads unbound $1).
+without_nounset() {
+  set +u
+  "$@"
+  local status=$?
+  set -u
+  return "$status"
+}
+
 load_nvm() {
   export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
   local nvm_sh=""
@@ -26,34 +35,36 @@ load_nvm() {
     nvm_sh="$NVM_DIR/nvm.sh"
   fi
   # shellcheck disable=SC1090
-  . "$nvm_sh"
+  without_nounset . "$nvm_sh"
 }
 
 DOTFILES="$(dotfiles_root)"
 
 step "Homebrew"
 brew update
-brew upgrade
-brew cleanup
-brew doctor || true
 if [[ -f "$DOTFILES/Brewfile" ]]; then
+  brew bundle cleanup --force --file="$DOTFILES/Brewfile"
   brew bundle --file="$DOTFILES/Brewfile"
 fi
+brew upgrade
+brew autoremove
+brew cleanup --prune=30
 if brew commands --quiet 2>/dev/null | grep -qx cu; then
-  brew cu --all --yes --no-brew-update || true
+  brew cu --all --yes --force --no-brew-update || true
 fi
+brew doctor || true
 
 step "Node LTS (nvm)"
 load_nvm
-from="$(nvm version)"
+from="$(without_nounset nvm version)"
 if [[ "$from" != "N/A" && "$from" != "system" ]]; then
-  nvm install --lts --latest-npm --reinstall-packages-from="$from"
+  without_nounset nvm install --lts --latest-npm --reinstall-packages-from="$from"
 else
-  nvm install --lts --latest-npm
+  without_nounset nvm install --lts --latest-npm
 fi
-nvm alias default 'lts/*'
-nvm use default
-npm update -g
+without_nounset nvm alias default 'lts/*'
+without_nounset nvm use default
+without_nounset npm update -g
 
 if command -v rustup >/dev/null 2>&1; then
   step "Rust"

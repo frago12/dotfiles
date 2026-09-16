@@ -12,7 +12,7 @@ alias ..='cd ..'
 alias home='cd ~'
 
 alias brew-prefix-user='sudo chown -R $(whoami) $(brew --prefix)/*'
-alias brewup='brew update; brew upgrade; brew cleanup; brew doctor; brew bundle'
+alias brewup='dotup'
 
 alias git-tree='tree = log --graph --decorate --pretty=oneline --abbrev-commit'
 
