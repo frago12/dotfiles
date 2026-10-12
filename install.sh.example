@@ -59,6 +59,15 @@ mkdir -p ~/.config
 ln -sfn "$dir/config/nvim" ~/.config/nvim
 ln -sfn "$dir/config/ghostty" ~/.config/ghostty
 
+# doc-review: one copy, linked for Claude Code and AGENTS.md agents.
+# ~/.agents/skills is the shared global path (Cline, Warp, Zed, and the
+# cross-runtime alias). Claude Code and Grok do not read that directory.
+mkdir -p "$HOME/.agents/skills" "$HOME/.grok/skills" "$HOME/.config/agents/skills" "$HOME/.claude/skills"
+ln -sfn "$dir/skills/doc-review" "$HOME/.agents/skills/doc-review"
+ln -sfn "$HOME/.agents/skills/doc-review" "$HOME/.claude/skills/doc-review"
+ln -sfn "$HOME/.agents/skills/doc-review" "$HOME/.grok/skills/doc-review"
+ln -sfn "$HOME/.agents/skills/doc-review" "$HOME/.config/agents/skills/doc-review"
+
 # Install Claude marketplaces
 claude  plugin marketplace add https://github.com/anthropics/claude-plugins-official
 claude  plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
