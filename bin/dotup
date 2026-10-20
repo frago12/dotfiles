@@ -468,8 +468,11 @@ without_nounset nvm alias default 'lts/*'
 without_nounset nvm use default
 without_nounset npm update -g
 
-if command -v rustup >/dev/null 2>&1; then
+rustup_bin="$(brew --prefix rustup 2>/dev/null)/bin"
+if [[ -x "$rustup_bin/rustup" ]]; then
   step "Rust"
+  export PATH="$rustup_bin:$HOME/.cargo/bin:$PATH"
+  rustup default stable
   rustup update
 fi
 

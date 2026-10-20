@@ -26,6 +26,9 @@ brew "docker"
 brew "node@24"
 brew "nvm"
 
+# Rust
+brew "rustup"
+
 # pyenv
 brew "pkg-config"
 brew "pipenv"
