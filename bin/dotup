@@ -417,6 +417,12 @@ while IFS= read -r name; do
   [[ -n "$name" ]] && vuln_upgrade+=("$name")
 done < <(gate_names upgrade)
 
+if (("${#vuln_pin[@]}")); then
+  for name in "${vuln_pin[@]}"; do
+    brew pin "$name"
+    vuln_pins_held+=("$name")
+  done
+fi
 if [[ -f "$DOTFILES/Brewfile" ]]; then
   if (("${#vuln_bundle_skip[@]}")); then
     skip_value="${vuln_bundle_skip[*]}"
@@ -429,12 +435,6 @@ if [[ -f "$DOTFILES/Brewfile" ]]; then
   fi
 fi
 brew upgrade --cask
-if (("${#vuln_pin[@]}")); then
-  for name in "${vuln_pin[@]}"; do
-    brew pin "$name"
-    vuln_pins_held+=("$name")
-  done
-fi
 if (("${#vuln_upgrade[@]}")); then
   if ! brew upgrade --formula "${vuln_upgrade[@]}"; then
     echo "Retrying formula upgrades individually." >&2
