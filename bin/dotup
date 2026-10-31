@@ -40,19 +40,10 @@ load_nvm() {
 
 DOTFILES="$(dotfiles_root)"
 vuln_bundle_skip=()
-vuln_pin=()
-vuln_upgrade=()
-vuln_pins_held=()
 vuln_tmps=()
 
 cleanup_dotup() {
-  local name tmp
-  if (("${#vuln_pins_held[@]}")); then
-    for name in "${vuln_pins_held[@]}"; do
-      brew unpin "$name" >/dev/null 2>&1 || true
-    done
-    vuln_pins_held=()
-  fi
+  local tmp
   if (("${#vuln_tmps[@]}")); then
     for tmp in "${vuln_tmps[@]}"; do
       rm -f "$tmp"
@@ -69,10 +60,12 @@ new_tmp() {
   printf '%s\n' "$path"
 }
 
-# Skip formulae whose current Homebrew version has a known high or critical
-# advisory. Pins stop a later upgrade from pulling one in as a dependency.
+# Skip new installs of formulae whose current Homebrew version has a known high
+# or critical advisory. Installed formulae are always upgraded: Homebrew only
+# publishes advisories for the current version, so an older install is never
+# known to be safer, and holding one back while its dependencies move breaks it.
 formula_vulnerability_gate() {
-  local api info outdated pinned deps names_file
+  local api info outdated deps names_file
   local -a names=()
 
   if ! command -v python3 >/dev/null 2>&1; then
@@ -83,7 +76,6 @@ formula_vulnerability_gate() {
   api="$(new_tmp)"
   info="$(new_tmp)"
   outdated="$(new_tmp)"
-  pinned="$(new_tmp)"
   deps="$(new_tmp)"
   names_file="$(new_tmp)"
 
@@ -93,7 +85,6 @@ formula_vulnerability_gate() {
   fi
 
   brew outdated --formula >"$outdated"
-  brew list --pinned >"$pinned" || true
   : >"$deps"
   if [[ -f "$DOTFILES/Brewfile" ]]; then
     HOMEBREW_NO_ENV_HINTS=1 brew deps --formula --missing --for-each --brewfile="$DOTFILES/Brewfile" >"$deps"
@@ -124,13 +115,13 @@ PY
     printf '%s\n' '{"formulae":[],"casks":[]}' >"$info"
   fi
 
-  python3 - "$api" "$info" "$DOTFILES/Brewfile" "$outdated" "$pinned" "$deps" <<'PY'
+  python3 - "$api" "$info" "$DOTFILES/Brewfile" "$outdated" "$deps" <<'PY'
 import json
 import re
 import sys
 from pathlib import Path
 
-api_path, info_path, brewfile, outdated_path, pinned_path, deps_path = sys.argv[1:]
+api_path, info_path, brewfile, outdated_path, deps_path = sys.argv[1:]
 
 def pkg_version(stable, revision):
     revision = int(revision or 0)
@@ -193,7 +184,6 @@ def lookup_api(formula):
     return None
 
 outdated = read_names(outdated_path)
-pinned = read_names(pinned_path)
 brewfile_names = []
 if Path(brewfile).is_file():
     brewfile_names = re.findall(r'^\s*brew\s+"([^"]+)"', Path(brewfile).read_text(), re.M)
@@ -210,14 +200,10 @@ def classify(formula):
     if identity in classified:
         return classified[identity]
     local_version = pkg_version(formula["versions"]["stable"], formula.get("revision"))
-    installed = formula.get("installed") or []
     record = {
         "name": formula.get("name") or identity,
         "version": local_version,
-        "installed": bool(installed),
-        "installed_versions": [item.get("version") for item in installed if item.get("version")],
-        "outdated": bool(keys_of(formula) & outdated),
-        "pinned": bool(keys_of(formula) & pinned),
+        "installed": bool(formula.get("installed")),
         "state": "uncovered",
         "advisories": [],
     }
@@ -236,16 +222,13 @@ def classify(formula):
     return record
 
 def blocked(record):
-    return record["state"] == "vulnerable" and (record["outdated"] or not record["installed"])
+    return record["state"] == "vulnerable" and not record["installed"]
 
 skip_install = []
-skip_upgrade = []
-already = []
+vulnerable_installed = []
 mismatch = []
 uncovered_targets = []
 bundle_skip = []
-pin = []
-upgrade = []
 
 def note_coverage(token, record):
     if record["state"] == "mismatch":
@@ -259,9 +242,9 @@ for token in brewfile_names:
         uncovered_targets.append(token)
         continue
     record = classify(formula)
-    if record["installed"] and not record["outdated"] and record["state"] == "vulnerable":
-        already.append(record)
     if record["installed"]:
+        if record["state"] == "vulnerable":
+            vulnerable_installed.append(record)
         continue
     note_coverage(token, record)
     missing = []
@@ -295,18 +278,13 @@ for token in sorted(outdated):
     formula = resolve(token)
     if formula is None:
         uncovered_targets.append(token)
-        upgrade.append(token)
         continue
     record = classify(formula)
     if record["state"] == "vulnerable":
-        skip_upgrade.append(record)
-        if not record["pinned"]:
-            pin.append(token)
-        continue
-    if record["pinned"]:
+        if record["name"] not in {item["name"] for item in vulnerable_installed}:
+            vulnerable_installed.append(record)
         continue
     note_coverage(token, record)
-    upgrade.append(token)
 
 def unique(items):
     seen = set()
@@ -330,8 +308,6 @@ mismatch = mismatch_unique
 
 def format_record(record):
     lines = [f"  {record['name']} {record['version']}"]
-    if record["outdated"] and record["installed_versions"]:
-        lines[0] += f" (installed {', '.join(record['installed_versions'])} stays)"
     shown = record["advisories"][:8]
     for advisory in shown:
         detail = f"{advisory['severity']} {advisory['label']}"
@@ -344,17 +320,14 @@ def format_record(record):
     return "\n".join(lines)
 
 sections = []
-if skip_install or skip_upgrade:
-    if skip_install:
-        sections.append("Not installing:\n" + "\n".join(format_record(record) for record in skip_install))
-    if skip_upgrade:
-        sections.append("Not upgrading:\n" + "\n".join(format_record(record) for record in skip_upgrade))
+if skip_install:
+    sections.append("Not installing:\n" + "\n".join(format_record(record) for record in skip_install))
 else:
-    sections.append("No formula slated for install or upgrade has a known high or critical vulnerability.")
-if already:
+    sections.append("No formula slated for install has a known high or critical vulnerability.")
+if vulnerable_installed:
     sections.append(
-        "Already installed at a vulnerable version, and left in place:\n"
-        + "\n".join(format_record(record) for record in already)
+        "Installed with a known vulnerability in the current version (upgraded as usual):\n"
+        + "\n".join(format_record(record) for record in vulnerable_installed)
     )
 if mismatch:
     names = ", ".join(f"{record['name']} ({record['version']}, advisory {record['remote_version']})" for record in mismatch)
@@ -369,11 +342,7 @@ sections.append("Casks, Node, Rust, Grok, and Ruby gems are outside this check."
 
 report = "\n".join(sections) + "\n"
 print(report, end="")
-print("@@json " + json.dumps({
-    "bundle_skip": bundle_skip,
-    "pin": pin,
-    "upgrade": upgrade,
-}))
+print("@@json " + json.dumps({"bundle_skip": bundle_skip}))
 PY
 }
 
@@ -408,21 +377,7 @@ vuln_bundle_skip=()
 while IFS= read -r name; do
   [[ -n "$name" ]] && vuln_bundle_skip+=("$name")
 done < <(gate_names bundle_skip)
-vuln_pin=()
-while IFS= read -r name; do
-  [[ -n "$name" ]] && vuln_pin+=("$name")
-done < <(gate_names pin)
-vuln_upgrade=()
-while IFS= read -r name; do
-  [[ -n "$name" ]] && vuln_upgrade+=("$name")
-done < <(gate_names upgrade)
 
-if (("${#vuln_pin[@]}")); then
-  for name in "${vuln_pin[@]}"; do
-    brew pin "$name"
-    vuln_pins_held+=("$name")
-  done
-fi
 if [[ -f "$DOTFILES/Brewfile" ]]; then
   if (("${#vuln_bundle_skip[@]}")); then
     skip_value="${vuln_bundle_skip[*]}"
@@ -435,20 +390,7 @@ if [[ -f "$DOTFILES/Brewfile" ]]; then
   fi
 fi
 brew upgrade --cask
-if (("${#vuln_upgrade[@]}")); then
-  if ! brew upgrade --formula "${vuln_upgrade[@]}"; then
-    echo "Retrying formula upgrades individually." >&2
-    for name in "${vuln_upgrade[@]}"; do
-      brew upgrade --formula "$name" || echo "Could not upgrade ${name}." >&2
-    done
-  fi
-fi
-if (("${#vuln_pins_held[@]}")); then
-  for name in "${vuln_pins_held[@]}"; do
-    brew unpin "$name"
-  done
-  vuln_pins_held=()
-fi
+brew upgrade --formula
 brew autoremove
 brew cleanup --prune=30
 if brew commands --quiet 2>/dev/null | grep -qx cu; then
