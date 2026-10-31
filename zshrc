@@ -1,7 +1,3 @@
-# Custom config
-# setopt noincappendhistory
-# setopt nosharehistory
-
 # Custom zshrc sources are stored in ~/.zshrc.d
 if [[ -d $HOME/.zshrc.d ]] ; then
   for config in "$HOME"/.zshrc.d/*.bash ; do
@@ -20,15 +16,15 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export STARSHIP_CONFIG=~/dev/frago/dotfiles/config/starship.toml
 eval "$(starship init $SHELL)"
 
-# History in cache directory:
+# History
+mkdir -p ~/.cache/zsh
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
+setopt HIST_IGNORE_DUPS
 
 # Load direnv
 eval "$(direnv hook $SHELL)"
-
-export HISTCONTROL=ignoredups
 
 export EDITOR='nvim'
 
