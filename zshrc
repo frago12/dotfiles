@@ -6,8 +6,8 @@ if [[ -d $HOME/.zshrc.d ]] ; then
 fi
 unset -v config
 
-# Autojump
-[ -f "${HOMEBREW_PREFIX}/etc/profile.d/autojump.sh" ] && . "${HOMEBREW_PREFIX}/etc/profile.d/autojump.sh"
+# Autojump (sourcing autojump.sh would load autojump.zsh twice)
+[ -f "${HOMEBREW_PREFIX}/share/autojump/autojump.zsh" ] && . "${HOMEBREW_PREFIX}/share/autojump/autojump.zsh"
 
 # Starship
 export STARSHIP_CONFIG=~/dev/frago/dotfiles/config/starship.toml

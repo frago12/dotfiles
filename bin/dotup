@@ -393,6 +393,7 @@ brew upgrade --cask
 brew upgrade --formula
 brew autoremove
 brew cleanup --prune=30
+rm -f "$HOME"/.zcompdump*
 if brew commands --quiet 2>/dev/null | grep -qx cu; then
   brew cu --all --yes --force --no-brew-update || true
 fi

@@ -1,9 +1,10 @@
 # Zsh completion
-if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-  autoload -Uz compinit
-  zstyle ':completion:*' menu select
-  zmodload zsh/complist
-  compinit
-  _comp_options+=(globdots) # Include hidden files.
+if [[ -d "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]]; then
+  FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
 fi
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+# -C reuses ~/.zcompdump without rescanning; dotup deletes it after installing formulae.
+compinit -C
+_comp_options+=(globdots) # Include hidden files.
