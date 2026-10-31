@@ -11,7 +11,7 @@ unset -v config
 
 # Starship
 export STARSHIP_CONFIG=~/dev/frago/dotfiles/config/starship.toml
-eval "$(starship init $SHELL)"
+eval "$(starship init zsh)"
 
 # History
 mkdir -p ~/.cache/zsh
@@ -21,7 +21,7 @@ HISTFILE=~/.cache/zsh/history
 setopt HIST_IGNORE_DUPS
 
 # Load direnv
-eval "$(direnv hook $SHELL)"
+eval "$(direnv hook zsh)"
 
 export EDITOR='nvim'
 
