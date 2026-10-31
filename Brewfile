@@ -38,10 +38,8 @@ brew "sqlite3"
 brew "xz"
 brew "zlib"
 
-# Ruby development
-brew "ruby-install"
-brew "ruby-build"
-brew "rbenv"
+# Ruby (bundle for the Gemfile; also required by tmuxinator)
+brew "ruby"
 
 # More nice-to-haves and various development libraries
 brew "autojump"

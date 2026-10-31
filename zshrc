@@ -6,9 +6,6 @@ if [[ -d $HOME/.zshrc.d ]] ; then
 fi
 unset -v config
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # Autojump
 [ -f "${HOMEBREW_PREFIX}/etc/profile.d/autojump.sh" ] && . "${HOMEBREW_PREFIX}/etc/profile.d/autojump.sh"
 
