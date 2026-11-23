@@ -15,6 +15,7 @@ alias brew-prefix-user='sudo chown -R $(whoami) $(brew --prefix)/*'
 alias brewup='dotup'
 
 alias git-tree='tree = log --graph --decorate --pretty=oneline --abbrev-commit'
+alias git-onmain='git pull --rebase --autostash origin main'
 
 alias forkapp="open -a fork"
 
