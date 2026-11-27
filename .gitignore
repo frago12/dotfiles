@@ -8,3 +8,6 @@ claude/*
 
 # Installed and updated by the Rex app
 agents/skills/rex/
+
+# Work-internal, kept out of this public repo
+agents/skills/pr-review-qa-tests/
