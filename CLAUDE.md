@@ -10,6 +10,8 @@ This is a personal dotfiles repository for macOS development environment setup. 
 - **Package Management**: `Brewfile` for Homebrew packages and `Gemfile` for Ruby gems
 - **Terminal Theming**: `config/starship.toml` for shell prompt, terminal color schemes
 - **Tmux Configuration**: `tmux.conf` with plugin management via TPM
+- **Agent Skills**: `agents/skills/` holds every skill (own and third-party), symlinked to `~/.agents` and linked into Claude Code by `install.sh`
+- **Agent Plugins**: `claude/settings.json` (`enabledPlugins`) for Claude Code, `codex/plugins.txt` for Codex
 - **Installation Script**: `install.sh` for symlinking dotfiles
 
 ## Common Commands

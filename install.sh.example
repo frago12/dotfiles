@@ -6,7 +6,7 @@
 ########## Variables
 dir=/path/to/dotfile # dotfiles directory
 olddir=/path/to/dotfile_old # old dotfiles backup directory
-files="zshrc zshrc.d secrets.d bin claude tmux.conf tmux ripgreprc" # list of files/folders to symlink in
+files="zshrc zshrc.d secrets.d bin claude agents tmux.conf tmux ripgreprc" # list of files/folders to symlink in
 ##########
 
 # Install Homebrew
@@ -59,21 +59,31 @@ mkdir -p ~/.config
 ln -sfn "$dir/config/nvim" ~/.config/nvim
 ln -sfn "$dir/config/ghostty" ~/.config/ghostty
 
-# doc-review: one copy, linked for Claude Code and AGENTS.md agents.
-# ~/.agents/skills is the shared global path (Cline, Warp, Zed, and the
-# cross-runtime alias). Claude Code and Grok do not read that directory.
-mkdir -p "$HOME/.agents/skills" "$HOME/.grok/skills" "$HOME/.config/agents/skills" "$HOME/.claude/skills"
-ln -sfn "$dir/skills/doc-review" "$HOME/.agents/skills/doc-review"
-ln -sfn "$HOME/.agents/skills/doc-review" "$HOME/.claude/skills/doc-review"
-ln -sfn "$HOME/.agents/skills/doc-review" "$HOME/.grok/skills/doc-review"
-ln -sfn "$HOME/.agents/skills/doc-review" "$HOME/.config/agents/skills/doc-review"
+# Skills live in agents/skills, linked to ~/.agents above. Codex and other
+# AGENTS.md agents read ~/.agents/skills directly. Claude Code and Grok do not,
+# so link every skill into their own directories.
+mkdir -p "$HOME/.claude/skills" "$HOME/.grok/skills" "$HOME/.config/agents/skills"
+for skill_path in "$HOME"/.agents/skills/*/; do
+  skill=$(basename "$skill_path")
+  for skills_dir in "$HOME/.claude/skills" "$HOME/.grok/skills" "$HOME/.config/agents/skills"; do
+    # A real directory is managed by its own tool (Rex installs one), leave it.
+    if [[ -e "$skills_dir/$skill" && ! -L "$skills_dir/$skill" ]]; then
+      continue
+    fi
+    ln -sfn "$HOME/.agents/skills/$skill" "$skills_dir/$skill"
+  done
+done
 
 # Install Claude marketplaces
 claude  plugin marketplace add https://github.com/anthropics/claude-plugins-official
 claude  plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
 
-# Install agent skills (https://www.npmjs.com/package/skills)
+# Install Codex plugins
+codex plugin marketplace add https://github.com/postmanlabs/postman-plugin.git
+while read -r plugin; do
+  codex plugin add "$plugin"
+done < "$dir/codex/plugins.txt"
+
+# skills CLI (https://www.npmjs.com/package/skills). Skills added with
+# `skills add --global` land in agents/skills, so commit them from there.
 npm install -g skills@latest
-skills add vercel-labs/skills --skill find-skills --global --agent claude-code cursor grok --yes
-skills add dmmulroy/anti-slop --skill install-anti-slop --global --agent claude-code cursor grok --yes
-skills add wshobson/agents --skill mobile-ios-design --global --agent claude-code cursor grok --yes

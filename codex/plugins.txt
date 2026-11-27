@@ -1,0 +1,6 @@
+postman@postman
+shopify@openai-curated-remote
+figma@openai-curated-remote
+notion@openai-curated-remote
+linear@openai-curated-remote
+github@openai-curated-remote
