@@ -136,6 +136,17 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh -c 'rex __internal session-start --agent claude --feature-session-naming=false 2>/dev/null || true'",
+            "timeout": 5
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -157,7 +168,8 @@
     "notion@claude-plugins-official": true,
     "codex@openai-codex": true,
     "swift-lsp@claude-plugins-official": true,
-    "postman@claude-plugins-official": true
+    "postman@claude-plugins-official": true,
+    "shopify-ai-toolkit@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
@@ -183,6 +195,11 @@
         "source": "git",
         "url": "https://github.com/EveryInc/compound-engineering-plugin.git"
       }
+    }
+  },
+  "modelSettings": {
+    "claude-fable-5-2": {
+      "effortLevel": "high"
     }
   },
   "tui": "fullscreen",
