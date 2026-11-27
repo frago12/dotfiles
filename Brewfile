@@ -19,7 +19,6 @@ brew "watchman"
 brew "postgresql@18"
 brew "flyctl"
 brew "act"
-brew "docker"
 
 # Node
 brew "node@24"
@@ -75,7 +74,6 @@ brew "reattach-to-user-namespace"
 # Apps
 cask "1password-cli"
 cask "typora"
-cask "ghostty"
 
 # Fonts
 cask "font-hack-nerd-font"

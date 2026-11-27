@@ -57,7 +57,6 @@ done
 # Symlink ~/.config apps (nvim, etc.)
 mkdir -p ~/.config
 ln -sfn "$dir/config/nvim" ~/.config/nvim
-ln -sfn "$dir/config/ghostty" ~/.config/ghostty
 
 # Skills live in agents/skills, linked to ~/.agents above. Codex and other
 # AGENTS.md agents read ~/.agents/skills directly. Claude Code and Grok do not,
