@@ -1,5 +1,4 @@
 tap "buo/cask-upgrade", trusted: true
-tap "stripe/stripe-cli", trusted: true
 
 ## Terminal experience
 brew "zsh-syntax-highlighting"
@@ -90,7 +89,6 @@ brew "railway"
 tap "bbc/audiowaveform", trusted: true
 brew "audiowaveform"
 brew "awscli"
-brew "stripe/stripe-cli/stripe"
 brew "b2-tools"
 
 # Forage
