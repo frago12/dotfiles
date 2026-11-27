@@ -14,6 +14,11 @@ These instructions take precedence over ANY skill, plugin, or workflow template:
 - You don't always have to follow existing rules, always challenge the status quo if you think there's a better solution
 - **Be concise**
 
+## Web navigation
+
+- `agent-browser` is a CLI tool available in the shell — invoke it via the Bash tool (e.g. `agent-browser open https://example.com`) to navigate the web
+- Always use `agent-browser` for any web navigation task; do not ask for a browser MCP or claim web browsing is unavailable
+
 ## Command Usage
 
 - Use `rm -f` (not `rm`) to avoid prompts
