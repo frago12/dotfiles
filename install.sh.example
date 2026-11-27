@@ -74,6 +74,11 @@ for skill_path in "$HOME"/.agents/skills/*/; do
   done
 done
 
+# Global agent instructions live in agents/AGENTS.md. Claude Code reads them
+# through the claude/CLAUDE.md symlink, Codex needs its own link.
+mkdir -p "$HOME/.codex"
+ln -sfn "$HOME/.agents/AGENTS.md" "$HOME/.codex/AGENTS.md"
+
 # Install Claude marketplaces
 claude  plugin marketplace add https://github.com/anthropics/claude-plugins-official
 claude  plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin

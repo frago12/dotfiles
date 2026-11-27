@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to coding agents when working with code in this repository.
 
 ## Repository Structure
 
@@ -10,6 +10,7 @@ This is a personal dotfiles repository for macOS development environment setup. 
 - **Package Management**: `Brewfile` for Homebrew packages and `Gemfile` for Ruby gems
 - **Terminal Theming**: `config/starship.toml` for shell prompt, terminal color schemes
 - **Tmux Configuration**: `tmux.conf` with plugin management via TPM
+- **Agent Instructions**: `agents/AGENTS.md` holds the global instructions for every agent, symlinked as `~/.claude/CLAUDE.md` (via `claude/CLAUDE.md`) and `~/.codex/AGENTS.md` (by `install.sh`)
 - **Agent Skills**: `agents/skills/` holds every skill (own and third-party), symlinked to `~/.agents` and linked into Claude Code by `install.sh`
 - **Agent Plugins**: `claude/settings.json` (`enabledPlugins`) for Claude Code, `codex/plugins.txt` for Codex
 - **Installation Script**: `install.sh` for symlinking dotfiles
