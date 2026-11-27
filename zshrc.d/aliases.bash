@@ -24,3 +24,5 @@ alias npm-global="npm ls -g --depth=0"
 alias start-docker='open -ga Docker'
 alias stop-docker='osascript -e '\''quit app "Docker"'\'
 alias restart-docker='stop-docker && start-docker'
+
+alias typora="open -a typora"
