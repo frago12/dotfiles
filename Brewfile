@@ -74,12 +74,6 @@ cask "font-jetbrains-mono-nerd-font"
 # Railway
 brew "railway"
 
-# Dequency
-tap "bbc/audiowaveform", trusted: true
-brew "audiowaveform"
-brew "awscli"
-brew "b2-tools"
-
 # Forage
 brew "vips"
 brew "tfenv"
@@ -88,3 +82,4 @@ brew "gnupg"
 brew "pinentry-mac"
 brew "uv"
 brew "mise"
+brew "awscli"
