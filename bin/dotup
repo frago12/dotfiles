@@ -402,7 +402,9 @@ brew doctor || true
 step "Node LTS (nvm)"
 load_nvm
 from="$(without_nounset nvm version)"
-if [[ "$from" != "N/A" && "$from" != "system" ]]; then
+latest_lts="$(without_nounset nvm version-remote --lts)"
+# nvm refuses to reinstall packages from the version it is installing.
+if [[ "$from" != "N/A" && "$from" != "system" && "$from" != "$latest_lts" ]]; then
   without_nounset nvm install --lts --latest-npm --reinstall-packages-from="$from"
 else
   without_nounset nvm install --lts --latest-npm
