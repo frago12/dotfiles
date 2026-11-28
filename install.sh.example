@@ -85,6 +85,7 @@ claude  plugin marketplace add https://github.com/anthropics/claude-plugins-offi
 # Install Codex plugins
 codex plugin marketplace add https://github.com/postmanlabs/postman-plugin.git
 while read -r plugin; do
+  echo "Adding codex plugin $plugin..."
   codex plugin add "$plugin"
 done < "$dir/codex/plugins.txt"
 
