@@ -3,17 +3,14 @@ tap "buo/cask-upgrade", trusted: true
 ## Terminal experience
 brew "zsh-syntax-highlighting"
 brew "zsh-completions"
-brew "zsh-git-prompt"
 
 # Better versions of Mac built-ins
 brew "colordiff"
 brew "rsync"
-brew "the_silver_searcher"
 
 # General development
 brew "git"
 brew "git-lfs"
-brew "vcprompt"
 brew "universal-ctags"
 brew "watchman"
 brew "postgresql@18"
@@ -36,16 +33,13 @@ brew "sqlite3"
 brew "xz"
 brew "zlib"
 
-# Ruby (bundle for the Gemfile; also required by tmuxinator)
+# Ruby
 brew "ruby"
 
 # More nice-to-haves and various development libraries
 brew "autojump"
 brew "httpie"
 brew "openssl"
-brew "tmux"
-brew "tmuxinator"
-brew "trash"
 brew "tree"
 brew "bat"
 brew "pre-commit"
@@ -64,9 +58,6 @@ brew "ripgrep"
 brew "agent-browser"
 brew "zizmor"
 brew "ffmpeg"
-
-# tmux copy and paste
-brew "reattach-to-user-namespace"
 
 # React native
 # brew "cocoapods"

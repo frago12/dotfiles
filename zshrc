@@ -9,8 +9,7 @@ unset -v config
 # Autojump (sourcing autojump.sh would load autojump.zsh twice)
 [ -f "${HOMEBREW_PREFIX}/share/autojump/autojump.zsh" ] && . "${HOMEBREW_PREFIX}/share/autojump/autojump.zsh"
 
-# Starship
-export STARSHIP_CONFIG=~/dev/frago/dotfiles/config/starship.toml
+# Starship (config is symlinked to ~/.config/starship.toml by install.sh)
 eval "$(starship init zsh)"
 
 # History
@@ -26,7 +25,7 @@ eval "$(direnv hook zsh)"
 export EDITOR='nvim'
 
 # pnpm
-export PNPM_HOME="/Users/franciscogonzalez/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

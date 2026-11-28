@@ -338,7 +338,7 @@ if uncovered_targets:
     if extra > 0:
         preview += f", and {extra} more"
     sections.append(f"No Homebrew advisory for: {preview}.")
-sections.append("Casks, Node, Rust, Grok, and Ruby gems are outside this check.")
+sections.append("Casks, Node, Rust, and Grok are outside this check.")
 
 report = "\n".join(sections) + "\n"
 print(report, end="")
@@ -422,11 +422,6 @@ fi
 if command -v grok >/dev/null 2>&1; then
   step "Grok"
   grok update
-fi
-
-if [[ -f "$DOTFILES/Gemfile" ]] && command -v bundle >/dev/null 2>&1; then
-  step "Ruby gems"
-  (cd "$DOTFILES" && bundle install)
 fi
 
 step "Done"

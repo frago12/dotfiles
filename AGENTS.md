@@ -7,9 +7,8 @@ This file provides guidance to coding agents when working with code in this repo
 This is a personal dotfiles repository for macOS development environment setup. The main components are:
 
 - **Shell Configuration**: `zshrc` with modular configuration files in `zshrc.d/`
-- **Package Management**: `Brewfile` for Homebrew packages and `Gemfile` for Ruby gems
+- **Package Management**: `Brewfile` for Homebrew packages
 - **Terminal Theming**: `config/starship.toml` for shell prompt, terminal color schemes
-- **Tmux Configuration**: `tmux.conf` with plugin management via TPM
 - **Agent Instructions**: `agents/AGENTS.md` holds the global instructions for every agent, symlinked as `~/.claude/CLAUDE.md` (via `claude/CLAUDE.md`) and `~/.codex/AGENTS.md` (by `install.sh`)
 - **Agent Skills**: `agents/skills/` holds every skill (own and third-party), symlinked to `~/.agents` and linked into Claude Code by `install.sh`
 - **Agent Plugins**: `claude/settings.json` (`enabledPlugins`) for Claude Code, `codex/plugins.txt` for Codex
@@ -24,7 +23,7 @@ cp install.sh.example install.sh
 # Edit install.sh to set correct paths
 ./install.sh
 
-# Update brew (incl. leftover cleanup), Node LTS, rust, grok, and gems
+# Update brew (incl. leftover cleanup), Node LTS, rust, and grok
 dotup
 
 # Reload shell configuration
@@ -33,14 +32,10 @@ reload
 
 ### Development Environment
 ```bash
-# Tmux session management
-ta <session-name>  # Attach to tmux session
-
 # Common aliases available:
 ll                 # List files with details
 ..                 # Go up one directory
 flushdns          # Flush DNS cache
-lock              # Lock screen
 ```
 
 ## Architecture
@@ -59,12 +54,9 @@ The `zshrc` file sources all `.bash` files from `zshrc.d/` directory, providing 
 
 ### Package Management Strategy
 - **Homebrew**: Primary package manager with comprehensive Brewfile
-- **Ruby Gems**: Minimal gem dependencies via Gemfile
-- **Tmux Plugins**: TPM (Tmux Plugin Manager) with sensible defaults and Catppuccin theme
 
 ## Key Configuration Files
 
 - `zshrc.d/aliases.bash`: Custom command aliases and shortcuts
 - `config/starship.toml`: Terminal prompt customization
-- `tmux.conf`: Tmux configuration with mouse support and custom key bindings
 - `Brewfile`: Complete development environment package list
